@@ -14,9 +14,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('reports','ReportsAppController@index');
-    Route::resource('api/reports','ReportsController');
+    // Route::get('reports','ReportsAppController@index');
+    Route::resource('reports','ReportsController');
 
     // Route::get('patrimonies','PatrimoniesAppController@index');
-    Route::resource('api/patrimonies','PatrimoniesController');
+    Route::resource('patrimonies','PatrimoniesController');
 });

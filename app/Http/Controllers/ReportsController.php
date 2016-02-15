@@ -13,7 +13,12 @@ class ReportsController extends Controller
 
     public function index() {
         $reports = Report::all();
-        return $reports;
+        return view('reports/index', ['reports' => $reports]);
+    }
+
+    public function show($id) {
+        $report = Report::findOrFail($id);
+        return view('reports/edit', ['report' => $report]);
     }
 
     public function store(Request $request) {

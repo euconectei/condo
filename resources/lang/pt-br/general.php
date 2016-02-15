@@ -10,4 +10,7 @@ return [
     'Logout' => 'Sair',
     'Welcome' => 'Bem Vindo',
 
+    // Ações de Sistema
+    'Add' => 'Adicionar',
+
 ];

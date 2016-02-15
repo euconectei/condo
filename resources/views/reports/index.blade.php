@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container" ng-app="reportApp" ng-controller="ReportController">
+
     	<h1>@lang('report.Title')</h1>
         <h2>@lang('report.Create')</h2>
         <div class="row">
             <div class="col-md-6">
                 <h3>@lang('report.Reported')</h3>
-                <div class="form-horizontal" ng-controller="PatrimonyController">
+                <div class="form-horizontal">
                     {{-- TODO: Separar os blocos dos apartamentos na criação de notificações --}}
                     <div class="form-group">
                         <label for="block" class="col-md-4 control-label">@lang('report.BlockNumber')</label>
                         <div class="col-md-2">
-                            <select class="form-control" ng-model="block" ng-options="p.number group by p.block for p in patrimonies | orderBy:'block' "></select>
+                            <select class="form-control"></select>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-4 col-md-2">
-                            <button class="btn btn-primary"  ng-click="addReport()">Add</button>
+                            <button class="btn btn-primary">@lang('general.Add')</button>
                             <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
                         </div>
                     </div>
@@ -53,16 +53,16 @@
                 </div>
     			<table class="table table-striped">
                     <tr>
-                        <th></th>
-                        {{-- <th>@lang('report.Ok')</th> --}}
+                        <th>ID</th>
+                        <th>@lang('report.Ok')</th>
                         <th>@lang('report.Description')</th>
                         <th>@lang('report.Reported')</th>
                         <th>@lang('report.Reporter')</th>
                         <th>@lang('report.Delete')</th>
                     </tr>
                     @forelse($reports as $report)
-                        <tr onclick="javascript:location.href='reports/{{ $reports->id }}'">
-                            {{-- <td>{{ $report->id }}</td> --}}
+                        <tr onclick="javascript:location.href='reports/{{ $report->id }}'">
+                            <td>{{ $report->id }}</td>
         					<td>{{ $report->done }}</td>
         					<td>{{ $report->report }}</td>
         					<td>{{ $report->id_reported }}</td>
@@ -86,5 +86,4 @@
     			</table>
     		</div>
     	</div>
-    </div>
 @endsection
