@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Report;
-
 use App\Patrimony;
+use App\Report;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReportsController extends Controller
@@ -16,12 +13,31 @@ class ReportsController extends Controller
 
     public function index()
     {
-        $reports = Report::all();
-        foreach ($reports as $key => $value) {
-            $reports[$key]['reported'] = Patrimony::find($reports[$key]['id_reported']);
+        $me = Auth::user()->id;
+        $myReports = Report::where('id_reported', $me)->get();
+        foreach ($myReports as $key => $value) {
+            $myReports[$key]['reported'] = Patrimony::find($myReports[$key]['id_reported']);
+            $myReports[$key]['reporter'] = Patrimony::find($myReports[$key]['id_reporter']);
+            if ($myReports[$key]['done'] === 1) {
+                $myReports[$key]['done'] = 'done';
+            } else {
+                $myReports[$key]['done'] = 'pending';
+            }
         }
-//        return $reports;
-        return view('reports/index', ['reports' => $reports]);
+
+        $iReported = Report::where('id_reporter', $me)->get();
+        foreach ($iReported as $key => $value) {
+            $iReported[$key]['reported'] = Patrimony::find($iReported[$key]['id_reported']);
+            $iReported[$key]['reporter'] = Patrimony::find($iReported[$key]['id_reporter']);
+            if ($iReported[$key]['done'] === 1) {
+                $iReported[$key]['done'] = 'done';
+            } else {
+                $iReported[$key]['done'] = 'pending';
+            }
+        }
+
+//        return ['myReports' => $myReports, 'iReported' => $iReported];
+        return view('reports/index', ['myReports' => $myReports, 'iReported' => $iReported]);
     }
 
     public function create()
@@ -41,8 +57,8 @@ class ReportsController extends Controller
     public function store(Request $request)
     {
         $request['id_reporter'] = Auth::user()->id;
-        $report = Report::create($request->all());
-        return $report;
+        Report::create($request->all());
+        header('location:javascript:history(-1)');
     }
 
     public function update($id)

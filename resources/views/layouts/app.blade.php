@@ -48,17 +48,22 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">@lang('home.Title')</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            @lang('report.Title') <span class="caret"></span>
-                        </a>
+                    @if (Auth::guest())
 
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="{{ url('/reports/create') }}">Novo</a></li>
-                          <li><a href="{{ url('/reports') }}">Pesquisar</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                @lang('report.Title') <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                {{-- TODO: i18n --}}
+                                <li><a href="{{ url('/reports/create') }}">Novo</a></li>
+                                <li><a href="{{ url('/reports') }}">Pesquisar</a></li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -93,9 +98,6 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!--AngularJS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 	<script src="js/app.js"></script>
     @if(Auth::guest())
@@ -111,8 +113,5 @@
             });
         </script>
     @endif
-	<script src="js/services/patrimony-service.js"></script>
-	<script src="js/controllers/report-controller.js"></script>
-	<script src="js/controllers/patrimony-controller.js"></script>
 </body>
 </html>
