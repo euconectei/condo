@@ -36,8 +36,9 @@ class ReportsController extends Controller
             }
         }
 
-//        return ['myReports' => $myReports, 'iReported' => $iReported];
-        return view('reports/index', ['myReports' => $myReports, 'iReported' => $iReported]);
+       return $myReports;
+    //    return ['myReports' => $myReports, 'iReported' => $iReported];
+        // return view('reports/index', ['myReports' => $myReports, 'iReported' => $iReported]);
     }
 
     public function create()

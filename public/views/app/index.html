@@ -41,6 +41,7 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/user">Usuário</a></li>
+              <li><a ng-href="#/report">Ocorrência</a></li>
               <li><a ng-href="#/vehicle">Veículo</a></li>
               <li><a ng-href="#/patrimony">Patrimônio</a></li>
               <li><a ng-href="#/maintenance">Manutenção</a></li>
@@ -84,17 +85,22 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-environment/dist/angular-environment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/app-environment.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/services/userservice.js"></script>
         <script src="scripts/controllers/user.js"></script>
         <script src="scripts/controllers/vehicle.js"></script>
         <script src="scripts/controllers/patrimony.js"></script>
         <script src="scripts/controllers/maintenance.js"></script>
+        <script src="scripts/services/reportservice.js"></script>
+        <script src="scripts/controllers/report.js"></script>
         <!-- endbuild -->
 </body>
 </html>
